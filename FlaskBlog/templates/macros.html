@@ -1,0 +1,31 @@
+{% macro rates(element, fileslist, dir_ectory,comments ) %}
+
+    {{ element.label }}
+
+    <table class="tb5">
+        <tbody>
+            <tr >
+                {% for i in fileslist%}
+                    {% set filename = dir_ectory+i %}
+                    <td class="w16" style="text-align:center">
+                        <img class = "rounded article-img " src="{{ url_for('static', filename = filename )}}">
+                    </td>
+
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+
+    {{ element (min=1, max=5,  step = 1,class=" form-control slider") }}
+
+    <table class="tb5">
+        <tbody>
+            <tr >
+                {% for i in comments %}
+                <td class="w16 " style="text-align:center">{{ i |safe() }}</td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+
+{% endmacro %}

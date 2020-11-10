@@ -1,0 +1,268 @@
+{% from "macros.html" import rates %}
+{% extends "Layout_rpa.html" %}
+
+{% block content1 %}
+<div class="btn-group">
+
+
+    {% if  legend == 'Update your RPA idea' %}
+            <a class="btn btn-outline-info " href="{{ url_for('RPA.rpa_post',post_id = post_id) }}">Cancel</a>
+    {% else %}
+            <a class="btn btn-outline-info " href="{{ url_for('main.RPA_j') }}">Cancel</a>
+    {% endif %}
+
+    <a class="btn btn-outline-info ml-2"   href = "/email"   >Send E_mail</a>
+
+ </div>
+{% endblock content1%}
+
+{% block content%}
+
+ <div class="content-section">
+ <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">{{ legend }}</legend>
+                <div class="form-group">
+                    {{ form.title.label(class="form-control-label") }}
+                    {% if form.title.errors %}
+                        {{ form.title(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.title.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.title(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.content.label(class="form-control-label") }}
+                    {% if form.content.errors %}
+                        {{ form.content(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.content.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.content(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.area.label(class="form-control-label") }}
+                    {% if form.area.errors %}
+                        {{ form.area(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.area.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.area(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.cat.label(class="form-control-label") }}
+                    {% if form.cat.errors %}
+                        {{ form.cat(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.cat.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.cat(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.subcat.label(class="form-control-label") }}
+                    {% if form.subcat.errors %}
+                        {{ form.subcat(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.subcat.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.subcat(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group"> {{rates (form.rulebaserate,filelist,dir_ectory[0], comments[0] )}}</div>
+                <div class="form-group"> {{rates (form.indatarate,filelist,dir_ectory[1], comments[1] )}}</div>
+                <div class="form-group"> {{rates (form.indatastructrate,filelist,dir_ectory[2], comments[2] )}}</div>
+                <div class="form-group"> {{rates (form.changesrate,filelist,dir_ectory[3], comments[3] )}}</div>
+
+
+
+                <div class="form-group pt-5 ml-2" > {{ form.b (type="checkbox" , data_toggle="toggle ", data_on="Yes", data_off="No", data_onstyle="success",  data_offstyle="danger")}}
+                    {{form.b.label}}
+                </div>
+
+
+                <div class="form-group" id = "docs"  >
+                    <label class="m-2" style="width:200"> Select one of more </label>
+                     <div > {{ form.doc1 }} {{form.doc1.label}}</div>
+                     <div > {{ form.doc2 }} {{form.doc2.label}}</div>
+                     <div > {{ form.doc3 }} {{form.doc3.label}}</div>
+                     <div > {{ form.doc4 }} {{form.doc4.label}}</div>
+                </div>
+
+            </fieldset>
+
+            <div class="form-group p-3">
+               {{ form.submit(class="btn btn-outline-info",hidden='true',id= "form-submit") }}
+                <button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#staticBackdrop" id = "rat"> Save </button>
+            </div>
+
+     <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog ">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel"> Your RPA Process SCORES </h5>
+                  </div>
+                    <div class= "modal-body" >
+
+                    <div id="demo" style= "background-color:#fefefe; padding:2em" >
+                        <div class="circlechart" data-percentage= "10"  id = "score">Total score</div>
+                        <div class="circlechart" data-percentage="{{suitability}}" id = "suitability"> Suitability</div>
+                        <div class="circlechart" data-percentage="{{readiness}}" id = "readiness">Readiness</div>
+                    </div>
+
+
+                    <p>{{form.email.label}}</p>
+                    <p>
+                        {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                      </p>
+                  </div>
+                  <div class="modal-footer">
+                    <a class="btn btn-outline-info ml-2"   href = "/email"   >Get result by E_mail</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id = "close-button">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+     </form>
+
+
+   </div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script>
+$('#close-button').click(function(){
+    console.log ('#close-buttton was clicked');
+    $('#form-submit').click();
+});
+
+</script>
+
+<script>
+    document.getElementById('docs').style.display="none"
+     document.getElementById('demo').style.display="none"
+    let area_select = document.getElementById('area');
+    let cat_select = document.getElementById('cat');
+    let subcat_select = document.getElementById('subcat');
+    let b = document.getElementById('b')
+
+    //console.log(b.checked)
+     if (b.checked) {
+        document.getElementById('docs').style.display="block";}
+
+    b.onchange = function(){
+        if (b.checked) {
+        document.getElementById('docs').style.display="block";
+        } else {
+        document.getElementById('doc1').checked = false;
+        document.getElementById('doc2').checked = false;
+        document.getElementById('doc3').checked = false;
+        document.getElementById('doc4').checked = false;
+        document.getElementById('docs').style.display="none";
+        }
+    }
+
+
+
+
+    area_select.onchange = function(){
+            areaV = area_select.value;
+            fetch ('/cat/'+areaV).then(function(response){
+                response.json().then(function(data) {
+                    console.table(data);
+                    let optionHTML = '';
+
+                    for (let cat of data.r_cat){
+                        optionHTML += '<option value= "'+ cat.id + '">' + cat.title + '</option>';
+                        }
+                cat_select.innerHTML = optionHTML;
+                });
+            });
+    }
+    cat_select.onchange = function(){
+            catV = cat_select.value;
+            fetch ('/subcat/'+catV).then(function(response){
+                response.json().then(function(data) {
+                    console.table(data);
+                    let optionHTML1 = '';
+
+                    for (let subcat of data.r_subcat){
+                        optionHTML1 += '<option value= "'+ subcat.id + '">' + subcat.title + '</option>';
+                        }
+                subcat_select.innerHTML = optionHTML1;
+                });
+            });
+    }
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename = 'progresscircle.js') }}"></script>
+<script>
+    let rat = document.getElementById('rat');
+    rat.onclick= function(){
+            $('#score').attr('data-percentage',88);
+            $('#suitability').attr('data-percentage',60);
+            $('#readiness').attr('data-percentage',73);
+            alert('eyeyeye');
+            $('.circlechart').circlechart(); // Initialization
+            document.getElementById('demo').style.display="block" ;
+            };
+
+        //fetch ('/'+rules+'/'+input+'/'+indata+'/'+chg+'/'+doc+'/'+d1+'/'+d2+'/'+d3+'/'+d4)
+        //.then(function(response){
+        //response.json().then(function(data) {
+        //   console.table(data);
+        //    var a =data.scores.score;
+         //   var b = data.scores.suitability;
+         //  var c = data.scores.readiness;
+         //   $('#score').attr('data-percentage',a);
+         //   $('#suitability').attr('data-percentage',b);
+         //   $('#readiness').attr('data-percentage',c);
+         //   $('.circlechart').circlechart();
+         //   document.getElementById('demo').style.display="block" ;
+         //   });
+        //});
+
+
+</script>
+
+<script>
+       $('.circlechart').circlechart(); // Initialization
+ </script>
+
+{% endblock content%}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+        <!-- Required meta tags -->
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel = "stylesheet" type = "text/css" href="{{ url_for('static', filename = 'main.css') }}">
+
+
+
+    <meta charset="UTF-8">
+    <title>range slider</title>
+</head>
+<body>
+    <form action="" method= "POST">
+        <table class="tb-5">
+            <tbody>
+                <tr >
+
+                    <td class="col-2" style="text-align:center">
+                        <img class = "rounded article-img " src="{{ url_for('static', filename = 'Rules/rules_1.png')}}">
+                    </td>
+                    <td class="col-2" style="text-align:center">
+                        <img class = "rounded article-img " src="{{ url_for('static', filename = 'Rules/rules_2.png')}}">
+                    </td>
+                    <td class="col-2" style="text-align:center">
+                        <img class = "rounded article-img " src="{{ url_for('static', filename = 'Rules/rules_3.png')}}">
+                    </td>
+                    <td class="col-2" style="text-align:center">
+                         <img class = "rounded article-img " src="{{ url_for('static', filename = 'Rules/rules_4.png')}}">
+                    </td>
+                    <td class="col-2"style="text-align:center">
+                         <img class = "rounded article-img " src="{{ url_for('static', filename = 'Rules/rules_5.png')}}">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class=" form-control slider">
+            <a class="ui-slider-handle" href="#">
+            <div id="slider-result">4</div>
+            </a>
+
+            <input id="znch" name="znch" type="hidden" />
+        </div>
+        <div class="row">
+
+        </div>
+        <table class="tb-5">
+            <tbody>
+                <tr >
+                    <td class="col-2" style="text-align:center">Very creative</td>
+                    <td class="col-2" style="text-align:center">Pretty <br> creative</td>
+                    <td class="col-2" style="text-align:center">A mix between  <br> rules and creativity </td>
+                    <td class="col-2" style="text-align:center"> Pretty <br> Rule Based</td>
+                    <td class="col-2"style="text-align:center"> Very <br> Rule Based</td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+        $( ".slider" ).slider({
+        animate: true,
+        range: "min",
+        value: 4,
+        min: 1,
+        max: 5,
+        step: 1,
+
+        slide: function( event, ui ) {
+        $( "#slider-result" ).html(ui.value);
+        },
+
+        change: function(event, ui) {
+        $('#znch').attr('value', ui.value);
+        }
+
+        });
+        });
+    </script>
+</body>
+</html>

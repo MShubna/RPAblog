@@ -1,0 +1,124 @@
+{% extends "Layout_rpa.html" %}
+{% block content1 %}
+
+{% endblock content1%}
+{% block content %}
+<div class="form-group">
+    <div class="t_tip">
+        <input type="checkbox" data-toggle="toggle " data-on="Yes" data-off="No" data-onstyle="success" id = "ma"
+               data-offstyle="danger">
+        <span class="tooltiptext">click to toggle</span>
+
+
+    </div>
+</div>
+  <div class="form-group p-3">
+
+      <button type="button" class="btn btn-outline-info" id ="form-submit" hidden = "true" >form submit</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">launch static modal  </button>
+
+               <button type="button" class="btn btn-outline-info" id ="modal-confirm">Save</button>
+
+       <button type="button" class="btn btn-outline-info" id="primaryButton" > 1st </button>
+       <button type="button" class="btn btn-outline-info" id="secondaryButton" > 2nd </button>
+
+            </div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="circle" id="circle-a">
+	<strong></strong>
+</div>
+<div class="circle" id="circle-b">
+	<strong></strong>
+</div>
+<div class="circle" id="circle-c">
+	<strong></strong>
+</div>
+
+      <!-- Modal -->
+
+              <div class="modal fade" id="myOutput" role="dialog">
+                <div class="modal-dialog">
+
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Modal Header</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>
+                          blalabla
+                      </p>
+                    </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                  </div>
+
+                </div>
+              </div>
+
+
+
+     </form>
+
+
+   </div>
+<script>
+     let b = document.getElementById('ma')
+     console.log(b.checked)
+
+      let primary = document.getElementById('primaryButton');
+    let secondary = document.getElementById('secondaryButton');
+
+    primary.onclick =  function(){
+       console.log('you clicked the primary button');
+       alert("1");
+       secondary.click();
+    }
+    secondary.onclick =  function(){
+       console.log('you clicked the primary button');
+       alert("2");
+
+    }
+
+</script>
+<script> src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script>
+
+    $('#modal-confirm').click(function(){
+        // Perform the action after modal confirm button is clicked.
+        $('#myOutput').modal('show');
+        console.log ('#modal-confirm was clicked');
+
+        $('#form-submit').click();
+
+    });
+</script>
+
+
+
+{% endblock content%}
