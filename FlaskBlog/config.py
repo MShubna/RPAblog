@@ -8,7 +8,7 @@ class Config:
     MAIL_PORT = 587
     MAIL_USE_TLS = True
     MAIL_USERNAME = 'msshubna@gmail.com'  # os.environ.get('EMAIL_USER')
-    MAIL_PASSWORD = 'gxumdrbxuegngzau'  # os.environ.get('EMAIL_PASS')
+    MAIL_PASSWORD = os.environ.get('EMAIL_PASS')
 
     #MAIL_USERNAME = os.environ.get('EMAIL_USER')
     #MAIL_PASSWORD = os.environ.get('EMAIL_PASS')
