@@ -1,4 +1,4 @@
-import os
+#import os
 
 class Config:
     SECRET_KEY = '4f7872c50669c36dbf73ea07dee32da1'
