@@ -4,11 +4,13 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
 from FlaskBlog.config import Config
 #from flask_migrate import Migrate, MigrateCommand
 #from flask_script import Manager
-from flask_admin import Admin
-from flask_admin.contrib.sqla import ModelView
+
+
 
 
 db = SQLAlchemy()
@@ -21,7 +23,7 @@ from FlaskBlog.Model_s import *
 
 def create_app(config_class=Config):
     application = Flask ( __name__ )
-    application.config.from_object(Config)
+    application.config.from_object(config_class)
     db.init_app(application)
     bcrypt.init_app(application)
     login_manager.init_app(application)

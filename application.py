@@ -1,5 +1,5 @@
 from FlaskBlog import create_app
-from os import  environ
+#from os import  environ
 
 
 application = create_app()
